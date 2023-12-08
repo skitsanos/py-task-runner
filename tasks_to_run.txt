@@ -1,0 +1,2 @@
+echo "hello from $(pwd)"
+jq -n -c '{name: "John Doe", age: 30, isEmployed: true}'
