@@ -66,3 +66,24 @@ script with the desired parameters.
 
 This tool is ideal for scenarios where you need to run multiple commands or scripts simultaneously and efficiently, such
 as batch processing, data analysis, or automated testing environments.
+
+## Compiling into a binary
+
+For ease of distribution and use, this application can be compiled into a single executable file using PyInstaller. This
+allows users to run the application without needing a separate Python installation or dealing with dependencies. To
+create an executable, first install PyInstaller via pip:
+
+```shell
+pip install pyinstaller
+```
+
+Then, compile the script into a single executable file using the following command:
+
+```shell
+pyinstaller --onefile task-runner.py
+```
+
+This command generates a standalone executable file in the dist directory. You can distribute this file to users who can
+run the application directly without needing Python installed on their system. This feature is particularly useful for
+deploying the application in environments where Python is not available or for users who might not be familiar with
+Python scripts.

@@ -3,6 +3,7 @@ import datetime
 import subprocess
 import os
 import argparse
+import sys
 
 
 def run_task(command):
@@ -28,17 +29,17 @@ def main():
 
     if not args.file or not args.type:
         parser.print_help()
-        exit(1)
+        sys.exit(1)
 
     # exit if there is no file provided
     if not args.file:
         print("Please provide a file path.")
-        exit(1)
+        sys.exit(1)
 
     # exit if the file does not exist
     if not os.path.exists(args.file):
         print(f"File {args.file} does not exist.")
-        exit(1)
+        sys.exit(1)
 
     # set number of workers for the task pool
     num_cores = os.cpu_count()
