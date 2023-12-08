@@ -18,6 +18,30 @@ adjusting the number of worker threads based on the nature of the tasks and the 
 - **Command-Line Interface**: Offers a simple and intuitive command-line interface for specifying the file containing
   the tasks and the type of tasks, enhancing user convenience and flexibility.
 
+## Number of workers
+
+Calculating the optimal number of num_workers for a ThreadPoolExecutor in Python depends on the nature of the tasks and
+the characteristics of the system on which the code is running. There are two primary types of tasks:
+
+- **CPU-bound tasks**: These tasks are limited by the speed of the CPU. Examples include mathematical computations, data
+  processing, etc.
+- **I/O-bound tasks**: These tasks are limited by input/output operations, such as reading/writing files, network
+  operations, etc.
+
+### For CPU-bound Tasks
+
+The optimal number of workers is usually close to the number of CPU cores available, as having more workers than cores
+will not significantly improve performance and can even degrade it due to context switching and other overheads.
+
+### For I/O-bound Tasks
+
+The optimal number can be higher than the number of CPU cores because these tasks often wait for I/O operations to
+complete and do not continuously use the CPU. The exact number can vary significantly based on the nature of the I/O
+operations, the speed of the I/O subsystem, network latency, etc.
+
+A common heuristic is to use 2-4 times the number of CPU cores, but this can be adjusted based on the specific
+characteristics of the tasks and the I/O system.
+
 ## Usage
 
 The application is designed to be user-friendly and can be easily executed from the command line. Users can specify the
