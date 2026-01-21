@@ -31,11 +31,6 @@ tasks:
         uv pip install -r requirements.txt
 
   drop:
-    desc: Uninstall all packages from venv
-    preconditions:
-      - sh: command -v uv >/dev/null 2>&1
-        msg: "uv is required; install it from https://github.com/astral-sh/uv"
+    desc: Remove virtual environment
     cmds:
-      - |
-        . .venv/bin/activate
-        uv pip freeze | xargs uv pip uninstall
+      - test -d .venv && rm -rf .venv || echo ".venv not found; nothing to remove."
