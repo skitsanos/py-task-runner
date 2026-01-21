@@ -1,0 +1,41 @@
+version: '3'
+
+silent: true
+
+dotenv:
+  - .env
+
+tasks:
+  venv:
+    desc: Create virtual environment with uv
+    preconditions:
+      - sh: command -v uv >/dev/null 2>&1
+        msg: "uv is required; install it from https://github.com/astral-sh/uv"
+    cmds:
+      - |
+        uv venv .venv
+
+  install:
+    desc: Install dependencies with uv
+    deps:
+      - venv
+    preconditions:
+      - sh: command -v uv >/dev/null 2>&1
+        msg: "uv is required; install it from https://github.com/astral-sh/uv"
+      - sh: test -f requirements.txt
+        msg: "requirements.txt not found; skipping install"
+    cmds:
+      - |
+        . .venv/bin/activate
+        uv pip install --upgrade pip
+        uv pip install -r requirements.txt
+
+  drop:
+    desc: Uninstall all packages from venv
+    preconditions:
+      - sh: command -v uv >/dev/null 2>&1
+        msg: "uv is required; install it from https://github.com/astral-sh/uv"
+    cmds:
+      - |
+        . .venv/bin/activate
+        uv pip freeze | xargs uv pip uninstall
